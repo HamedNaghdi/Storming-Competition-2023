@@ -114,5 +114,16 @@
     <script src="~/login/js/popper.min.js"></script>
     <script src="~/login/js/bootstrap.min.js"></script>
     <script src="~/login/js/main.js"></script>
+
+    <script>
+        function redirectToAnotherPage() {
+            window.location.href = '/';
+        }
+
+        // Set the timeout for 10 minutes (10 * 60 seconds)
+        var timeoutInMinutes = 10;
+        var timeoutInMillis = timeoutInMinutes * 60 * 1000;
+        setTimeout(redirectToAnotherPage, timeoutInMillis);
+    </script>
 </body>
 </html>

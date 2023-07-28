@@ -67,8 +67,16 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js'></script>
     <script src="~/cong/js/script.js"></script>
+    <script>
+        function redirectToAnotherPage() {
+            window.location.href = '/';
+        }
 
-    <!-- ANALYTICS -->
+        // Set the timeout for 10 minutes (10 * 60 seconds)
+        var timeoutInMinutes = 10;
+        var timeoutInMillis = timeoutInMinutes * 60 * 1000;
+        setTimeout(redirectToAnotherPage, timeoutInMillis);
+    </script>
 
 </body>
 </html>
