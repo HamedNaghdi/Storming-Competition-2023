@@ -1,0 +1,50 @@
+﻿@page
+@model StormingCompetition.Pages.HamiModel
+@{
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="Username">Username</label>
+        <input asp-for="Username" type="text" class="form-control" placeholder="Username" required>
+    </div>
+    <div class="form-group">
+        <label for="Log">Log</label>
+        <input asp-for="Log" type="text" class="form-control" placeholder="Log" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<h2>Winners</h2>
+
+<ul>
+    @foreach(var user in Model.Users.Where(u => u.Win == true))
+    {
+        <li>
+            Team with Username = [@user.Username] is Locked = [@user.IsLocked] with Number of incorrect password = [@user.WrongPasswordCount]
+            <ol>
+                @foreach (var log in user.UserLogs)
+                {
+                    <li>@log.Log [@log.LogTime]</li>
+                }
+            </ol>
+        </li>
+    }
+</ul>
+
+<h2>Losers</h2>
+
+<ul>
+    @foreach (var user in Model.Users.Where(u => u.Win == false))
+    {
+        <li>
+            Team with Username = [@user.Username] is Locked = [@user.IsLocked] with Number of incorrect password = [@user.WrongPasswordCount]
+            <ol>
+                @foreach (var log in user.UserLogs)
+                {
+                    <li>@log.Log [@log.LogTime]</li>
+                }
+            </ol>
+        </li>
+    }
+</ul>
