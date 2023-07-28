@@ -8,17 +8,20 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
     private readonly DataContext _dataContext;
-
+    private readonly IConfiguration _configuration;
     private void SetViewData(string? message = null, bool isLocked = false)
     {
         ViewData["Message"] = message;
         ViewData["IsLocked"] = isLocked;
     }
 
-    public IndexModel(ILogger<IndexModel> logger, DataContext dataContext)
+    public IndexModel(ILogger<IndexModel> logger, 
+        DataContext dataContext, 
+        IConfiguration configuration)
     {
         _logger = logger;
         _dataContext = dataContext;
+        _configuration = configuration;
     }
 
     [BindProperty]
@@ -76,7 +79,7 @@ public class IndexModel : PageModel
 
         AddLog(user.Id, Password);
 
-        var isPasswordCorrect = Password.ToLowerInvariant() == "123456";
+        var isPasswordCorrect = Password.ToLowerInvariant() == _configuration["Password"];
         if (isPasswordCorrect)
         {
             user.Win = true;

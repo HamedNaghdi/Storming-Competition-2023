@@ -1,18 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace StormingCompetition.Models;
 
 public class DataContext : DbContext
 {
+    private readonly IWebHostEnvironment _webHostEnvironment;
+
     public DbSet<User> Users { get; set; }
     public DbSet<UserLog> UsersLog { get; set; }
 
     public string DbPath { get; }
 
-    public DataContext()
+    public DataContext(IWebHostEnvironment webHostEnvironment)
     {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
+        _webHostEnvironment = webHostEnvironment;
+        //var folder = Environment.SpecialFolder.LocalApplicationData;
+        //var path = Environment.GetFolderPath(folder);
+        //DbPath = System.IO.Path.Join(path, "StormingCompetition.db");
+        var folder = _webHostEnvironment.ContentRootPath;
+        var path = $"{folder}/Data";
         DbPath = System.IO.Path.Join(path, "StormingCompetition.db");
     }
 
